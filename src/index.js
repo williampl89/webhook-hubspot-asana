@@ -17,7 +17,7 @@ app.post('/webhooks/hubspot', async (req, res) => {
     return res.status(400).send('Datos no válidos');
   }
 
-  const { name } = hubspotData.properties.name;
+  const { name } = hubspotData.nombre_empresa;
 
   // Lógica para enviar datos a la API de Asana
   try {
