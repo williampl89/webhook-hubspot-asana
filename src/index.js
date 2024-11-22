@@ -11,13 +11,13 @@ app.use(bodyParser.json());
 // Endpoint para recibir webhooks de HubSpot
 app.post('/webhooks/hubspot', async (req, res) => {
   const hubspotData = req.body;
-
+  console.log(hubspotData);
   // Asegúrate de validar el contenido del webhook
   if (!hubspotData || !hubspotData.properties) {
     return res.status(400).send('Datos no válidos');
   }
 
-  const { name } = hubspotData.properties;
+  const { name } = hubspotData.properties.name;
 
   // Lógica para enviar datos a la API de Asana
   try {
@@ -25,9 +25,9 @@ app.post('/webhooks/hubspot', async (req, res) => {
       'https://app.asana.com/api/1.0/tasks',
       {
         data: {
-          name: `Tarea para: ${name}`,
-          notes: 'Revisar esta tarea este es una nota',
-          projects: [process.env.ASANA_PROJECT_ID], // ID del proyecto en Asana
+          name: `Tarea para: ${name.value}`,
+          notes: `Revisar esta tarea este es una nota: ${JSON.stringify(req.body)}`,
+          projects: [`${process.env.ASANA_PROJECT_ID}`], // ID del proyecto en Asana
           workspace: "1208820907061445"
         },
       },
