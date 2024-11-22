@@ -18,6 +18,7 @@ app.post('/webhooks/hubspot', async (req, res) => {
   }
 
   const { name } = hubspotData.nombre_empresa;
+  const { domain } = hubspotData.dominio_empresa;
 
   // Lógica para enviar datos a la API de Asana
   try {
@@ -25,8 +26,8 @@ app.post('/webhooks/hubspot', async (req, res) => {
       'https://app.asana.com/api/1.0/tasks',
       {
         data: {
-          name: `Tarea para: ${name.value}`,
-          notes: `Revisar esta tarea este es una nota: ${JSON.stringify(req.body)}`,
+          name: `Tarea para: ${name}`,
+          notes: `Revisar esta tarea este el dominio: ${domain}`,
           projects: [`${process.env.ASANA_PROJECT_ID}`], // ID del proyecto en Asana
           workspace: "1208820907061445"
         },
