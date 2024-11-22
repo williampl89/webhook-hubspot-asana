@@ -19,7 +19,8 @@ app.post('/webhooks/hubspot', async (req, res) => {
 
   const { nombre_empresa } = hubspotData.nombre_empresa;
   const { dominio_empresa } = hubspotData.dominio_empresa;
-
+  console.log('nombre empresa: ' + nombre_empresa);
+  console.log('dominio empresa: ' + dominio_empresa);
   // Lógica para enviar datos a la API de Asana
   try {
     const asanaResponse = await axios.post(
