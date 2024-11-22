@@ -13,7 +13,7 @@ app.post('/webhooks/hubspot', async (req, res) => {
   const hubspotData = req.body;
   console.log(hubspotData);
   // Asegúrate de validar el contenido del webhook
-  if (!hubspotData || !hubspotData.properties) {
+  if (!hubspotData) {
     return res.status(400).send('Datos no válidos');
   }
 
